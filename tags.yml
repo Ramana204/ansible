@@ -1,0 +1,26 @@
+### Ansible tags
+
+usually tags are useful if you want to segregate only specific tasks from your playbook.
+
+---
+- hosts: all
+  become: true
+  tasks:
+  - name: install httpd package
+    yum:
+      name: httpd
+      state: installed
+    tags: install_apache
+
+  - name: start httpd
+    service:
+      name: httpd
+      state: started
+    tags: start_apache
+
+  - name: copy index.html
+    copy:
+      src: /home/ansadmin/index.html
+      dest: /var/www/html
+      mode: 0666
+
