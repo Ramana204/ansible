@@ -1,0 +1,12 @@
+if you want to install multiple packages at a time by using list and with_items it is possible
+
+with_items  deprecated way. now everyone use the list.
+
+---
+- hosts: all
+  become: true
+  tasks:
+  - name: install packages
+    yum:
+      name: ['git', 'wget', 'tree']
+      state: installed
