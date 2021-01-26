@@ -1,0 +1,41 @@
+### Ansible Variables
+1. Define with in the playbooka
+1. passing from external files
+1. passing from host inventory
+1. passing while running playbook
+1. using group_vars and hosts_vars ans so on.
+
+#1
+---
+- hosts: all
+  become: true
+  vars:
+    user: Ram
+  tasks:
+  - name: creating user
+    user:
+      name: "{{ user }}"
+      
+ #2
+ vi uservar.yml
+ ---
+ user: venkat
+...
+
+vi var2.yml
+---
+- hosts: all
+  become: true
+  vars_files:
+    - uservar.yml
+  tasks:
+  - name: creating user
+    user:
+      name: "{{ user }}"
+
+
+#3
+ ansible-playbook vars2.yml -e "user=madhu"
+
+
+
