@@ -1,0 +1,24 @@
+1. ansible vault create vault-pass.yml
+
+---
+password: ramana204
+...
+
+
+2.we use vault-pass.yml file as variable and pass in playbook
+vi ansible-vault.yml
+
+---
+- hosts: all
+  become: true
+  vars_files:
+    vault-pass.yml
+  tasks:
+  - name: clone a private repo
+    git:
+      repo: https://Ramana204:{{ password }}@github.com/Ramana204/DevOps-Interview-Q-A.git
+      dest: /home/ansadmin/test-vault
+...
+
+
+3. ansible-playbook ansible-vault.yml --ask-vault-pass
